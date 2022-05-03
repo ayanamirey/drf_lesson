@@ -8,6 +8,11 @@ from women.models import Women
 from women.serializers import WomenSerializer
 
 
+class WomenAPIList(generics.ListCreateAPIView):
+    queryset = Women.objects.all()
+    serializer_class = WomenSerializer
+
+
 class WomenAPIView(APIView):
     def get(self, request):
         w = Women.objects.all()
@@ -33,6 +38,13 @@ class WomenAPIView(APIView):
         serializer.is_valid(raise_exception=True)
         serializer.save()
         return Response({"post": serializer.data})
+
+    def delete(self, request, pk, format=None):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response({"post": "delete post " + str(pk)})
+    # def delete(self, request, *args, **kwargs):
+    #     pk = kwargs.get("pk", None)
 
 # class WomenAPIView(generics.ListAPIView):
 #     queryset = Women.objects.all()

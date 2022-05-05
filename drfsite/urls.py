@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include
+from django.urls import path, include, re_path
 from women.views import WomenAPIList, WomenAPIUpdate, WomenAPIDestroy
 from rest_framework import routers
 
@@ -12,5 +12,7 @@ urlpatterns = [
     path('api/v1/drf-auth/', include('rest_framework.urls')),
     path('api/v1/women/<int:pk>/', WomenAPIUpdate.as_view()),
     path('api/v1/womendelete/<int:pk>/', WomenAPIDestroy.as_view()),
+    path('api/v1/auth/', include('djoser.urls')),
+    re_path(r'^auth/', include('djoser.urls.authtoken')),
     # path('api/v1/', include(router.urls))
 ]

@@ -20,3 +20,5 @@ urlpatterns = [
     path('api/v1/token/verify/', TokenVerifyView.as_view(), name='token_verify'),
     # path('api/v1/', include(router.urls))
 ]
+
+
